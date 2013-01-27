@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %title SnippetScheduler
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = javascript_include_tag "event_calendar"
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.brand{:href => "/"} UNIX-Snippet
+          %ul.nav
+            %li.active
+              %a{:href => "/"} Snippets
+          %p.navbar-text.pull-right
+            - if signed_in?
+              Welcome #{session[:username]}!
+              \#{link_to "Sign Out", "/signout"}
+            - else
+              = link_to "Sign in with Twitter", "/auth/twitter"
+
+    .container{:style => "margin-top: 50px"}
+      = yield
+
+    %footer.footer
+      %p.pull-right
+        %a{:href => "#"} Back to top
+      %p
+        フッターです。フッターです。

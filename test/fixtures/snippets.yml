@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  command: MyString
+  string,: MyString
+  description: MyString
+  text,: MyString
+  del_flg: MyString
+  integer: MyString
+
+two:
+  command: MyString
+  string,: MyString
+  description: MyString
+  text,: MyString
+  del_flg: MyString
+  integer: MyString

@@ -1,4 +1,4 @@
-LightningMash
+LLSnippet
 =============
 
-LL系の人気記事を取得、メモれるシンプルアプリ
+LL系のsnippetを投稿記録できるメモアプリ

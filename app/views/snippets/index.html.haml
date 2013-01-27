@@ -1,0 +1,9 @@
+- if signed_in?
+  %h1 Twitter Sample Application
+  = current_user.name
+
+  = link_to '全て表示', [:snippets]
+  - tag_cloud(Snippet.tag_counts_on(:tags), %w(css1 css2 css3 css4)) do |tag, css_class|
+    = link_to tag.name, { :action => :tag, :name => tag.name }, :class => css_class
+- else
+  ログインして下さい
