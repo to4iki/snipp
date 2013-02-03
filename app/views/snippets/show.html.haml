@@ -1,0 +1,11 @@
+- if signed_in?
+  .row
+    .span8
+      %h2= @snippet.title
+      %h6= @snippet.tag_list
+      %pre.prettyprint= @snippet.command
+      [description]
+      .well= @snippet.description
+
+- else
+  ログインして下さい

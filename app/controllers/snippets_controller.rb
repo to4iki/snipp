@@ -1,20 +1,23 @@
 class SnippetsController < ApplicationController
 
+  # /snippets
   def index
-    @snippets = Snippet.all
+    # 日付の降順でソート
+    @snippets = Snippet.all(:order => "created_at DESC")
     @tags = Snippet.tag_counts_on(:tags).order('count DESC')
   end
 
   def tag
     @snippets = Snippet.tagged_with(params[:name])
-    # order('count DESC')でカウントの多い順sort
+    # カウントの多い順にソート
     @tags = Snippet.tag_counts_on(:tags).order('count DESC')
 
     render 'index'
   end
 
+  # /snippets/(id)
   def show
-
+    @snippet = Snippet.find(params[:id])
   end
 
   def create

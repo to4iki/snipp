@@ -4,9 +4,8 @@
     %title SnippetScheduler
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
-    = javascript_include_tag "event_calendar"
     = csrf_meta_tags
-  %body
+  %body{:onload => "prettyPrint()"}
     .navbar.navbar-fixed-top
       .navbar-inner
         .container

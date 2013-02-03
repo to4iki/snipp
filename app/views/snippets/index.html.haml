@@ -9,12 +9,12 @@
         = link_to tag.name, { :action => :tag, :name => tag.name }, :class => css_class
 
   .row
-    .span4
+    .span8
       - @snippets.each do |snippet|
         %li{:id => "post_#{snippet.id}"}
-          = snippet.command
-          = link_to '[Edit]', edit_snippet_path(snippet)
-          [Delete]
+          = link_to snippet.title, snippet_path(snippet)
+          %h6= snippet.tag_list
+          %h6= snippet.created_at.strftime("%Y/%m/%d")
 
 
 - else
