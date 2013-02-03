@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(:version => 20130126171443) do
 
   create_table "snippets", :force => true do |t|
+    t.string   "title",       :null => false
     t.string   "command",     :null => false
     t.text     "description"
     t.integer  "del_flg"
