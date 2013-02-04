@@ -13,6 +13,9 @@ LightningMash::Application.routes.draw do
     end
   end
 
+  # Searchを追加
+  match "search" => "snippets#search"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

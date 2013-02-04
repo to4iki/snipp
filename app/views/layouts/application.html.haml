@@ -5,14 +5,14 @@
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  %body{:onload => "prettyPrint()"}
+  %body
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
           %a.brand{:href => "/"} LLSnippet
           %ul.nav
             %li.active
-              %a{:href => "/"} Snippets
+              = link_to 'New', :new_snippet
           %p.navbar-text.pull-right
             - if signed_in?
               Welcome #{session[:username]}!

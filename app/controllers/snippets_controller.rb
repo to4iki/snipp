@@ -20,12 +20,13 @@ class SnippetsController < ApplicationController
     @snippet = Snippet.find(params[:id])
   end
 
-  def create
-
+  # /snippet/new
+  def new
+    @snippet = Snippet.new
   end
 
-  def new
-
+  def create
+    @snippet = Snippet.new(params[:post])
   end
 
   def create
@@ -42,6 +43,11 @@ class SnippetsController < ApplicationController
 
   def destroy
 
+  end
+
+  def search
+    search_word = URI.decode(params[:q].to_s)
+    @snippets = Snippet.where(content: search_word)
   end
 
 end

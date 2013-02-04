@@ -24,6 +24,12 @@ gem 'less-rails-bootstrap'
 # タグ管理
 gem 'acts-as-taggable-on'
 
+# For Markdown
+gem 'markdown-scaffold', :group => :development
+gem 'redcarpet'
+gem "pygments.rb"          # => 0.2.3
+gem "rubypython", "0.5.1"  # For Heroku
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

@@ -2,6 +2,11 @@
   %h1 Post once a day!
   = current_user.name
 
+  #search_form_box
+    %form.form-search{action: "search", method: "get", role: "search"}
+      %input.input-medium.search-query{name: "q", placeholder: "Search", type: "text", value: params[:q]}
+      %input.btn{alt: "検索", value: "検索", type: "submit"}
+
   .row
     .span4.offset8
       = link_to '全て表示', [:snippets]
@@ -10,11 +15,12 @@
 
   .row
     .span8
-      - @snippets.each do |snippet|
-        %li{:id => "post_#{snippet.id}"}
-          = link_to snippet.title, snippet_path(snippet)
-          %h6= snippet.tag_list
-          %h6= snippet.created_at.strftime("%Y/%m/%d")
+      %ul
+        - @snippets.each do |snippet|
+          %li{:id => "post_#{snippet.id}"}
+            = link_to snippet.title, snippet_path(snippet)
+            %h6= snippet.tag_list
+            %h6= snippet.created_at.strftime("%Y/%m/%d")
 
 
 - else
