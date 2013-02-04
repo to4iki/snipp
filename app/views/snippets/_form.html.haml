@@ -1,0 +1,8 @@
+= form_for(@snippet, :html => {:class => 'well'}) do |f|
+  .field
+    = f.text_field :title, :placeholder => 'title'
+  .field
+    = f.text_area :command
+    = raw show_markdown( "ここにマークダウンが反映される" )
+  .actions
+    = f.submit :class => 'btn-primary'
