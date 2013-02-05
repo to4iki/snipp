@@ -26,11 +26,14 @@ class SnippetsController < ApplicationController
   end
 
   def create
-    @snippet = Snippet.new(params[:post])
-  end
-
-  def create
-
+    @snippet = Snippet.new(params[:snippet])
+    if @snippet.save
+      # snippet_path(/snippets)
+      redirect_to snippets_path, notice: 'Created!'
+    else
+      # newのviewの書き直し
+      render action: 'new'
+    end
   end
 
   def edit

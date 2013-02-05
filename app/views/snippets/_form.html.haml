@@ -1,8 +1,14 @@
 = form_for(@snippet, :html => {:class => 'well'}) do |f|
+  - if @snippet.errors.any?
+    %ul
+      - @snippet.errors.full_messages.each do |msg|
+        %li{:style => "color: Red"}= msg
+
   .field
     = f.text_field :title, :placeholder => 'title'
   .field
-    = f.text_area :command
-    = raw show_markdown( "ここにマークダウンが反映される" )
+    = f.text_field :tag_list, :placeholder => 'tag1, tag2, tag3'
+  .field
+    = f.text_area :fragment, :placeholder => '## Markdown'
   .actions
     = f.submit :class => 'btn-primary'

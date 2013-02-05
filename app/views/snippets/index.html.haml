@@ -1,4 +1,8 @@
 - if signed_in?
+  -# post完了通知
+  - if notice.present?
+    %p(class="alert alert-success")= notice
+
   %h1 Post once a day!
   = current_user.name
 
