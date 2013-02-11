@@ -1,20 +1,18 @@
-# encoding: utf-8
-
 LightningMash::Application.routes.draw do
+  root:to => 'users#index'
 
-  root:to => 'snippets#index'
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy"
 
+  resources :users, :only => [:index], :path => ""
 
   resources :snippets do
     collection do
-      get 'tag' # => tagを追加
+      get 'tag'
     end
   end
 
-  # Searchを追加
-  match "search" => "snippets#search"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

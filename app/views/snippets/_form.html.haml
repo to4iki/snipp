@@ -1,14 +1,53 @@
-= form_for(@snippet, :html => {:class => 'well'}) do |f|
-  - if @snippet.errors.any?
-    %ul
-      - @snippet.errors.full_messages.each do |msg|
-        %li{:style => "color: Red"}= msg
+.content
+  .row-fluid
+    .span4
+      %legend Snippet
+    .span1.offset7
+      #hintModal.modal.hide.fade
+        .modal-header
+          %a.close{"data-dismiss" => "modal"} ×
+          %h3 Cheat Sheet
+        .modal-body
+          %h5 Insert the code
+          .tooltip-demo.well
+            %p.muted{:style => "margin-bottom: 0;"}
+              リンク ->
+              %a{:href => "#", :rel => "tooltip", :title => "[タイトル](URL)"} [snipp](http://localhost:3000/snippets/)
+              %br/
+              コード: 1 ->
+              %a{:href => "#", :rel => "tooltip", :title => "一文だけの時"} ``で囲む
+              %br/
+              コード: 2 ->
+              %a{:href => "#", :rel => "tooltip", :title => "複数続く時"} 文頭に空白4つ
+        .modal-footer
+          %a.btn{"data-dismiss" => "modal", :href => "#"} quit
+      %a.btn.disabled{"data-toggle" => "modal", :href => "#hintModal"} hint
 
-  .field
-    = f.text_field :title, :placeholder => 'title'
-  .field
-    = f.text_field :tag_list, :placeholder => 'tag1, tag2, tag3'
-  .field
-    = f.text_area :fragment, :placeholder => '## Markdown'
-  .actions
-    = f.submit :class => 'btn-primary'
+
+
+  .row-fluid
+    .span4
+      = form_for(@snippet, :html => {:class => 'form-vertical'}) do |f|
+        - if @snippet.errors.any?
+          %ul
+            - @snippet.errors.full_messages.each do |msg|
+              %li{:style => "color: Red"}= msg
+
+        .field
+          = f.text_field :title, :placeholder => 'title'
+        .field
+          = f.text_field :tag_list, id: "tags", :placeholder => 'tag'
+        .wmd-panel
+          .field
+            = f.text_area :fragment, class: "wmd-input", id: "wmd-input", :placeholder => '# Markdown'
+        .field
+          = f.label :pin
+          = f.check_box :pin, {}, true
+        .actions
+          = f.submit :class => 'btn-primary'
+
+    .span8
+      .well
+        #wmd-preview.wmd-panel.wmd-preview
+
+= javascript_include_tag "markdown/runningEditor"

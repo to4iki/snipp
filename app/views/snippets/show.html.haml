@@ -1,9 +1,6 @@
-- if signed_in?
-  .row
+.content
+  .row-fluid
     .span8
       %h2= @snippet.title
       %h6= @snippet.tag_list
       = raw show_markdown( @snippet.fragment )
-
-- else
-  ログインして下さい

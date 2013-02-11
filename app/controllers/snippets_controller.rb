@@ -1,9 +1,11 @@
 class SnippetsController < ApplicationController
 
+  before_filter :require_login, :only => [:index, :show, :new, :edit]
+
   # /snippets
   def index
-    # 日付の降順でソート
-    @snippets = Snippet.all(:order => "created_at DESC")
+    # 日付の降順 + pinの有無 でソート
+    @snippets = Snippet.order("'pin' = CASE WHEN pin = 't' THEN 0 ELSE 'pin' END").order("created_at DESC").all
     @tags = Snippet.tag_counts_on(:tags).order('count DESC')
   end
 
@@ -36,21 +38,25 @@ class SnippetsController < ApplicationController
     end
   end
 
+  # snippets(id)/edit
   def edit
-
+    @snippet = Snippet.find(params[:id])
   end
 
   def update
-
+    @snippet = Snippet.find(params[:id])
+    if @snippet.update_attributes(params[:snippet])
+      redirect_to snippets_path, notice: 'Update!'
+    else
+      # editのviewの書き直し
+      render action: 'edit'
+    end
   end
 
   def destroy
-
-  end
-
-  def search
-    search_word = URI.decode(params[:q].to_s)
-    @snippets = Snippet.where(content: search_word)
+    @snippet = Snippet.find(params[:id])
+    @snippet.destroy
+    render json: { snippet: @snippet }
   end
 
 end

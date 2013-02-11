@@ -5,9 +5,7 @@ LLSnippet
 
 Description
 ----------
-snippetを投稿記録できるメモアプリ  
-一日一投稿のみ  
-コード表示部分はSyntaxHighlight対応  
+markdownで記述されたsnippetを溜めておくことができるバッファのようなアプリケーション  
 
 Board functions
 ----------
@@ -20,6 +18,7 @@ Use of technology
 Framework : Ruby on Rails  
 view      : haml  
 css       : Sass,TwitterBootstrap  
+other     : jQuery UI  
 
 ライセンス
 ----------

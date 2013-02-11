@@ -1,30 +1,27 @@
 !!!
 %html
   %head
-    %title SnippetScheduler
+    %title snipp
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.brand{:href => "/"} LLSnippet
-          %ul.nav
-            %li.active
-              = link_to 'New', :new_snippet
-          %p.navbar-text.pull-right
-            - if signed_in?
-              Welcome #{session[:username]}!
-              \#{link_to "Sign Out", "/signout"}
-            - else
-              = link_to "Sign in with Twitter", "/auth/twitter"
 
-    .container{:style => "margin-top: 50px"}
+    %header
+      %h1.title
+        - if signed_in?
+          = link_to current_user.screen_name, :snippets
+        - else
+          = link_to 'snipp', root_path
+      %ul.links
+        - if signed_in?
+          %li.link= link_to 'New', :new_snippet
+          %li.link= link_to 'Sign Out', '/signout'
+        - else
+          %li.link= link_to "Sign in with Twitter", "/auth/twitter"
+
+    .main
       = yield
 
-      / %footer.footer
-      /   %p.pull-right
-      /     %a{:href => "#"} Back to top
-      /   %p
-      /     フッターです。フッターです。
+    %footer
+      %p= link_to "github", "https://github.com/bamtsk/snipp", :target => "_blank", :title => "snipp is an open sourced project"

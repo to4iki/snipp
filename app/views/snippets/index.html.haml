@@ -1,31 +1,43 @@
-- if signed_in?
-  -# post完了通知
+.content
   - if notice.present?
-    %p(class="alert alert-success")= notice
+    #notice
+      %p(class="alert alert-success")= notice
 
-  %h1 Post once a day!
-  = current_user.name
-
-  #search_form_box
-    %form.form-search{action: "search", method: "get", role: "search"}
-      %input.input-medium.search-query{name: "q", placeholder: "Search", type: "text", value: params[:q]}
-      %input.btn{alt: "検索", value: "検索", type: "submit"}
-
-  .row
-    .span4.offset8
-      = link_to '全て表示', [:snippets]
-      - tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class|
-        = link_to tag.name, { :action => :tag, :name => tag.name }, :class => css_class
-
-  .row
-    .span8
+  .row-fluid
+    .span9
       %ul
-        - @snippets.each do |snippet|
-          %li{:id => "post_#{snippet.id}"}
-            = link_to snippet.title, snippet_path(snippet)
-            %h6= snippet.tag_list
-            %h6= snippet.created_at.strftime("%Y/%m/%d")
+        #accordion
+          - @snippets.each do |snippet|
+            %li{:id => "snippet_#{snippet.id}"}
+              %h3= snippet.title
+              %div
+                - if snippet.pin
+                  【pin】
+
+                %p= snippet.tag_list
+                %p= snippet.created_at.strftime("%Y/%m/%d")
+                = link_to '[show]', snippet_path(snippet)
+                = link_to '[Edit]', edit_snippet_path(snippet)
+                = link_to '[Delete]', snippet, :confirm => 'Sure?', |
+                                               :method => :delete, |
+                                               :remote =>  true
+
+    .span3
+      .well
+        = link_to '全て表示', [:snippets]
+        - tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class|
+          = link_to tag.name, { :action => :tag, :name => tag.name }, :class => css_class
 
 
-- else
-  ログインして下さい
+:javascript
+  $(function() {
+    setTimeout(function() {
+      $('#notice').fadeOut("slow");
+    }, 1000);
+
+    // 削除処理のAjax化
+    $('a[data-method="delete"]').on('ajax:success', function(e, data, status, xhr) {
+      $('#snippet_'+data.snippet.id).fadeOut("slow");
+    });
+
+  });

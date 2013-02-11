@@ -3,6 +3,7 @@ class CreateSnippets < ActiveRecord::Migration
     create_table :snippets do |t|
       t.string  :title, null: false
       t.text    :fragment
+      t.boolean :pin, default: false
 
       t.timestamps
     end

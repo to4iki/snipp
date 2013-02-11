@@ -11,12 +11,6 @@ end
 
 module LightningMash
   class Application < Rails::Application
-    # LESS
-    config.app_generators.stylesheet_engine :less
-    config.less.paths << "#{Rails.root}/lib/less/protractor/stylesheets"
-    config.less.compress = true
-    config.assets.compress = true
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
