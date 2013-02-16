@@ -2,26 +2,65 @@
   .row-fluid
     .span4
       %legend Snippet
-    .span1.offset7
-      #hintModal.modal.hide.fade
+    .span1.offset6
+      #tmpModal.modal.hide.fade
+        .modal-header
+          %a.close{"data-dismiss" => "modal"} ×
+          %h3 Template
+        .modal-body
+          %h5 コピペして使用して下さい
+          .tooltip-demo.well
+            %p.muted{:style => "margin-bottom: 0;"}
+              %table.table.table-bordered
+                %tbody
+                  %tr
+                    %td
+                      %a{:href => "#", :rel => "tooltip", :title => "[リンクテキスト](URL)"} link
+                    %td [bamtsk/snipp · GitHub](https://github.com/bamtsk/snipp)
+                  %tr
+                    %td
+                      %a{:href => "#", :rel => "tooltip", :title => "一文は` `で囲む"} code
+                    %td `puts value`
+                  %tr
+                    %td
+                      %a{:href => "#", :rel => "tooltip", :title => "複数文は行頭に空白4つ"} code
+                    %td
+                      %p
+                        &nbsp&nbsp&nbsp&nbsp def num
+                        %br/
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 1.next
+                        %br/
+                        &nbsp&nbsp&nbsp&nbsp end
+          %ul.omake
+            %li #、##、###：見出し（見出し文字の下に「=====」(h1)「-----」(h2)でもいい）
+            %li *ABCDEFG*：斜体
+            %li **ABCDEFG**：強調
+            %li 「*」「+」「-」：箇条書き（記号の直後にスペースかタブ要）
+            %li 行頭に数字＋ピリオド：番号付け（記号の直後にスペースかタブ要）
+            %li 箇条書き・番号付けの後ろで改行は、「行末スペース*2」でできる。レベル2は、「 - 」。
+            %li >：引用
+            %li ![代替テキスト](画像のURL)：画像
+            %li 行末にスペース2つ：段落内での改行
+            %li HTMLタグ：直接タグを書く(一部制限あり)
+
+        .modal-footer
+          %a.btn{"data-dismiss" => "modal", :href => "#"} quit
+
+      %a{"data-toggle" => "modal", :href => "#tmpModal", title: "テンプレート"}
+        %i.icon-wrench
+
+    .span1
+      #cheatSeatModal.modal.hide.fade
         .modal-header
           %a.close{"data-dismiss" => "modal"} ×
           %h3 Cheat Sheet
         .modal-body
-          %h5 Insert the code
-          .tooltip-demo.well
-            %p.muted{:style => "margin-bottom: 0;"}
-              リンク ->
-              %a{:href => "#", :rel => "tooltip", :title => "[タイトル](URL)"} [snipp](http://localhost:3000/snippets/)
-              %br/
-              コード: 1 ->
-              %a{:href => "#", :rel => "tooltip", :title => "一文だけの時"} ``で囲む
-              %br/
-              コード: 2 ->
-              %a{:href => "#", :rel => "tooltip", :title => "複数続く時"} 文頭に空白4つ
+          = image_tag 'markdown/Markdown.png'
         .modal-footer
           %a.btn{"data-dismiss" => "modal", :href => "#"} quit
-      %a.btn.disabled{"data-toggle" => "modal", :href => "#hintModal"} hint
+
+      %a{"data-toggle" => "modal", :href => "#cheatSeatModal", title: "Markdownチートシート"}
+        %i.icon-book
 
 
 
@@ -39,7 +78,7 @@
           = f.text_field :tag_list, id: "tags", :placeholder => 'tag'
         .wmd-panel
           .field
-            = f.text_area :fragment, class: "wmd-input", id: "wmd-input", :placeholder => '# Markdown'
+            = f.text_area :fragment, class: "wmd-input", id: "wmd-input", :placeholder => "`// Write your code here`"
         .field
           = f.label :pin
           = f.check_box :pin, {}, true

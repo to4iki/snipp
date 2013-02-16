@@ -15,10 +15,10 @@
           = link_to 'snipp', root_path
       %ul.links
         - if signed_in?
-          %li.link= link_to 'New', :new_snippet
-          %li.link= link_to 'Sign Out', '/signout'
+          %li.link= link_to_with_icon "pencil", :new_snippet, :title => "New", "data-placement" => "bottom"
+          %li.link= link_to_with_icon 'signout', '/signout', :title => "Sign Out", "data-placement" => "bottom"
         - else
-          %li.link= link_to "Sign in with Twitter", "/auth/twitter"
+          %li.link= link_to_with_icon 'signin', '/auth/twitter', :title => "Sign in with Twitter", "data-placement" => "bottom"
 
     .main
       = yield

@@ -5,22 +5,29 @@
 
   .row-fluid
     .span9
-      %ul
-        #accordion
-          - @snippets.each do |snippet|
-            %li{:id => "snippet_#{snippet.id}"}
-              %h3= snippet.title
-              %div
-                - if snippet.pin
-                  【pin】
+      %ul{style: "list-style:none;"}
+        - @snippets.each do |snippet|
+          %li{:id => "snippet_#{snippet.id}"}
+            %h3= snippet.title
+            %div
+              - if snippet.pin
+                %i.icon-magnet
 
-                %p= snippet.tag_list
-                %p= snippet.created_at.strftime("%Y/%m/%d")
-                = link_to '[show]', snippet_path(snippet)
-                = link_to '[Edit]', edit_snippet_path(snippet)
-                = link_to '[Delete]', snippet, :confirm => 'Sure?', |
-                                               :method => :delete, |
-                                               :remote =>  true
+              = link_to_with_icon 'share', snippet_path(snippet), :title => "Show"
+
+              .pull-right
+                = link_to_with_icon 'edit', edit_snippet_path(snippet), :title => "Edit", "data-placement" => "bottom"
+                = link_to_with_icon 'trash', snippet, :confirm => 'Sure?', |
+                                                      :method => :delete,  |
+                                                      :remote =>  true,
+                                                      :title => "Delete", "data-placement" => "bottom"
+
+            %div
+              %span.badge.badge-success= "snippet " + snippet.created_at.strftime("%Y/%m/%d")
+              .pull-right
+                %span.label= snippet.tag_list
+
+            %hr/
 
     .span3
       .well

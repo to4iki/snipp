@@ -1,6 +1,6 @@
 .content
   .row-fluid
-    .span8
+    .span12
       %h2= @snippet.title
-      %h6= @snippet.tag_list
-      = raw show_markdown( @snippet.fragment )
+      %span.label= @snippet.tag_list
+      .well= raw show_markdown( @snippet.fragment )
